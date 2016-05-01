@@ -1,3 +1,3 @@
 class EdictSerializer < ActiveModel::Serializer
-  attributes :japanese, :japanese_yomi, :english
+  attributes :japanese, :japanese_yomi
 end

@@ -1,6 +1,7 @@
 class EdictsController < ApplicationController
   def index
-    edicts = Edict.limit(10)
+    edicts = []
+    edicts = Edict.search(params[:word]) if params[:word].present?
     render json: edicts
   end
 

@@ -30,17 +30,13 @@ class Edict < ApplicationRecord
     end
 
     def search(word)
-      edicts = Edict.where("? = ANY (english)", word).pluck(:japanese, :japanese_yomi)
-      return format_search_result(edicts) if edicts.present?
+      edicts = Edict.where("? = ANY (english)", word)
+      return edicts if edicts.present?
 
-      edicts = Edict.where("english_summary ilike ?", "%#{word}%").pluck(:japanese, :japanese_yomi)
-      return format_search_result(edicts) if edicts.present?
+      edicts = Edict.where("english_summary ilike ?", "%#{word}%")
+      return edicts if edicts.present?
 
       []
-    end
-
-    def format_search_result(edicts)
-      edicts.map { |k| "#{k[0]}(#{k[1]})" }.join(', ')
     end
   end
 end
