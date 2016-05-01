@@ -5,12 +5,12 @@ class Edict < ApplicationRecord
       edicts = []
       File.open(file_path) do |file|
         file.each_line do |line|
-          japanese, japanese_yomi, english = parse_and_generate_sql(line)
+          japanese, japanese_yomi, english, english_summary = parse_and_generate_sql(line)
 
           next if japanese.blank? || japanese_yomi.blank? || english.blank?
           edicts << Edict.new(
             japanese: japanese, japanese_yomi: japanese_yomi,
-            english: english, english_summary: english.join(',')
+            english: english, english_summary: english_summary
           )
         end
       end
@@ -23,9 +23,10 @@ class Edict < ApplicationRecord
 
       japanese = match_data[1].strip
       japanese_yomi = match_data[2]
-      english = match_data[3].split("/").map { |word| word.sub(/\(.*\)\s+/, '') }
+      english = match_data[3].split("/").map { |word| word.sub(/\A\(.*?\)\s+(\w)/, '\1').sub(/\([0-9]\)\s+/, '') }
+      english_summary = match_data[3]
 
-      [japanese, japanese_yomi, english]
+      [japanese, japanese_yomi, english, english_summary]
     end
   end
 end
