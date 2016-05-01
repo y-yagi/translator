@@ -8,7 +8,10 @@ class Edict < ApplicationRecord
           japanese, japanese_yomi, english = parse_and_generate_sql(line)
 
           next if japanese.blank? || japanese_yomi.blank? || english.blank?
-          edicts << Edict.new(japanese: japanese, japanese_yomi: japanese_yomi, english: english)
+          edicts << Edict.new(
+            japanese: japanese, japanese_yomi: japanese_yomi,
+            english: english, english_summary: english.join(',')
+          )
         end
       end
       Edict.import(edicts)

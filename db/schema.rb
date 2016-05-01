@@ -17,12 +17,14 @@ ActiveRecord::Schema.define(version: 20160501055904) do
   enable_extension "plpgsql"
 
   create_table "edicts", force: :cascade do |t|
-    t.string   "japanese",      null: false
-    t.string   "japanese_yomi", null: false
-    t.string   "english",       null: false, array: true
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "japanese",        null: false
+    t.string   "japanese_yomi",   null: false
+    t.string   "english",         null: false, array: true
+    t.string   "english_summary", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["english"], name: "index_edicts_on_english", using: :gin
+    t.index ["english_summary"], name: "index_edicts_on_english_summary", using: :btree
   end
 
 end
