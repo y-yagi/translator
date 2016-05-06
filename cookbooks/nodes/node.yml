@@ -1,0 +1,6 @@
+rbenv:
+  global: 2.3.1
+  versions:
+    - 2.3.1
+  gems:
+    - bundler
