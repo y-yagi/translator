@@ -1,13 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  kanji: MyString
-  hiragana: MyString
-  english:
-    - MyString
-
-two:
-  kanji: MyString
-  hiragana: MyString
-  english:
-    - MyString
+edicts_47995:
+  japanese: "金盞花"
+  japanese_yomi: "きんせんか"
+  english: <%= ["marigold", "Calendula officinalis"] %>
+  english_summary: "(n) marigold/Calendula officinalis/"
