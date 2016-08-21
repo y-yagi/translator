@@ -1,9 +1,9 @@
 class Edict < ApplicationRecord
   class << self
     def import_from_edict_file!
-      file_path = Rails.root.join('tmp', 'edict_utf8.txt').to_s
+      edict_file = Rails.root.join('tmp', 'edict_utf8.txt')
       edicts = []
-      File.open(file_path) do |file|
+      edict_file.open do |file|
         file.each_line do |line|
           japanese, japanese_yomi, english, english_summary = parse_and_generate_sql(line)
 
